@@ -1,0 +1,87 @@
+{
+  "modelName": "Manual CNN Rainfall Predictor",
+  "paperAlignment": {
+    "referenceUrl": "https://www.techscience.com/cmc/v72n2/47227/html",
+    "notes": [
+      "The attached PDF could not be text-extracted directly because most text was converted to vector drawing commands.",
+      "This implementation follows the accessible paper structure available online: grayscale 28x28 input, scale-aware preprocessing, CNN convolution, ReLU, pooling, and softmax classification.",
+      "The current trainer is using the 'synthetic-dataset' dataset source.",
+      "All forward and backward passes are coded directly in numpy. No TensorFlow, PyTorch, Keras, or sklearn estimators are used for the CNN."
+    ]
+  },
+  "architecture": {
+    "inputSize": 28,
+    "convFilters": 4,
+    "kernelSize": 3,
+    "poolSize": 4,
+    "poolStride": 2,
+    "hiddenUnits": 24,
+    "classCount": 2,
+    "seed": 7,
+    "pooledSize": 13
+  },
+  "formulas": {
+    "convolution": "Z_k(i,j) = sum_c sum_u sum_v X_c(i+u,j+v) * W_k,c(u,v) + b_k",
+    "relu": "A_k(i,j) = max(0, Z_k(i,j))",
+    "pool": "P_k(i,j) = max_{u,v in window} A_k(stride*i+u, stride*j+v)",
+    "dense": "h = W_flat * vec(P) + b",
+    "softmax": "p_c = exp(z_c) / sum_j exp(z_j)",
+    "loss": "L = -sum_c y_c log(p_c)"
+  },
+  "trainingConfig": {
+    "epochs": 6,
+    "learningRate": 0.01,
+    "datasetPath": null,
+    "samplesPerClass": 24
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "trainLoss": 0.639654,
+      "trainAccuracy": 0.631579,
+      "validationLoss": 0.668077,
+      "validationAccuracy": 0.3
+    },
+    {
+      "epoch": 2,
+      "trainLoss": 0.585122,
+      "trainAccuracy": 0.710526,
+      "validationLoss": 0.641211,
+      "validationAccuracy": 0.3
+    },
+    {
+      "epoch": 3,
+      "trainLoss": 0.519087,
+      "trainAccuracy": 0.842105,
+      "validationLoss": 0.528813,
+      "validationAccuracy": 1.0
+    },
+    {
+      "epoch": 4,
+      "trainLoss": 0.436736,
+      "trainAccuracy": 0.947368,
+      "validationLoss": 0.683089,
+      "validationAccuracy": 0.3
+    },
+    {
+      "epoch": 5,
+      "trainLoss": 0.36918,
+      "trainAccuracy": 0.973684,
+      "validationLoss": 0.408546,
+      "validationAccuracy": 1.0
+    },
+    {
+      "epoch": 6,
+      "trainLoss": 0.299273,
+      "trainAccuracy": 0.973684,
+      "validationLoss": 0.29628,
+      "validationAccuracy": 1.0
+    }
+  ],
+  "datasetSource": "synthetic-dataset",
+  "generatedDataPath": "D:\\rainfall_prediction\\ml_service\\data\\generated",
+  "classLabels": [
+    "no-rain",
+    "rain"
+  ]
+}
