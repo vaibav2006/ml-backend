@@ -36,7 +36,15 @@ from assistant_service import build_dynamic_assistant_response
 
 
 app = FastAPI(title="V2S Rainfall Prediction ML Service")
+from fastapi.middleware.cors import CORSMiddleware
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # for testing (later restrict to your frontend URL)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 ROOT = Path(__file__).resolve().parent
 ARTIFACTS_DIR = ROOT / "artifacts"
 DATA_DIR = ROOT / "data"
